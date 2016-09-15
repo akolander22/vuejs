@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Code Challenge</title>
+  </head>
+  <body>
+    <div id="editor">
+      <!-- <textarea v-model="input" debounce="300"></textarea> -->
+      <!-- <h1>{{message}}</h1> -->
+      <!-- <input v-model="message" /> -->
+
+      <textarea v-model="message"></textarea>
+
+      <pre>
+        {{ $data | json }}
+      </pre>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js" charset="utf-8"></script>
+  <script src="https://cdn.tinymce.com/4/tinymce.min.js"></script>
+  <script>
+
+    new Vue ({
+      el: '#editor',
+      data: {
+        message: 'Enter Text Here'
+      }
+
+    })
+    tinymce.init({selector:'textarea'});
+  </script>
+</html>
