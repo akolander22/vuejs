@@ -6,16 +6,20 @@
   </head>
   <body>
     <div id="editor">
-      <!-- <textarea v-model="input" debounce="300"></textarea> -->
-      <!-- <h1>{{message}}</h1> -->
-      <!-- <input v-model="message" /> -->
+        <textarea  v-model="enteredText"></textarea>
 
-      <textarea v-model="message"></textarea>
 
-      <pre>
+
+            {{enteredText}}
+          
+
+
+
+      <!-- <pre>
         {{ $data | json }}
-      </pre>
+      </pre> -->
     </div>
+
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js" charset="utf-8"></script>
   <script src="https://cdn.tinymce.com/4/tinymce.min.js"></script>
@@ -23,11 +27,19 @@
 
     new Vue ({
       el: '#editor',
+
       data: {
-        message: 'Enter Text Here'
-      }
+        enteredText: 'Some Text goes here'
+      },
+      // computed: {
+      //   input: function(){
+      //     return this.enteredText;
+      //   }
+      // }
 
     })
+
+
     tinymce.init({selector:'textarea'});
   </script>
 </html>
