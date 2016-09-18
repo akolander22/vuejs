@@ -2,44 +2,65 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Vue Code Challenge</title>
+    <title></title>
   </head>
-  <body>
-    <div id="editor">
-        <textarea  v-model="enteredText"></textarea>
-
-
-
-            {{enteredText}}
-          
-
-
-
-      <!-- <pre>
-        {{ $data | json }}
-      </pre> -->
-    </div>
-
-  </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js" charset="utf-8"></script>
-  <script src="https://cdn.tinymce.com/4/tinymce.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.3.4/tinymce.min.js"></script>
+  <body>
+    <div id="tinymce-form">
+        <textarea
+                id="editor"
+                rows="10"
+                v-tinymce-editor="content">
+                {{content}}
+        </textarea>
+    {{ content }}
+    <!-- {{markdown}} -->
+    </div>
+  </body>
   <script>
 
-    new Vue ({
-      el: '#editor',
+    Vue.directive('tinymce-editor',{
+      twoWay: true,
+      bind: function() {
+        var vm = this;
+        tinymce.init({
+          selector: '#editor',
+          setup: function(editor) {
 
-      data: {
-        enteredText: 'Some Text goes here'
-      },
-      // computed: {
-      //   input: function(){
-      //     return this.enteredText;
-      //   }
-      // }
+            // initializing tinymce
+            editor.on('init', function() {
+              tinymce.get('editor').setContent(vm.value);
+            });
+
+            //edits content as input is changed
+            editor.on('keyup', function() {
+
+              // this gets the new value from input
+              var new_value = tinymce.get('editor').getContent(vm.value);
+
+              // sets the content value
+              vm.set(new_value)
+            });
+          }
+        });
+      }
+
 
     })
 
+    new Vue({
+      el: '#tinymce-form',
+      data: {
+        content: 'Editable Text Goes Here',
+        // markdown: content.toMarkdown
+      }
+    })
 
-    tinymce.init({selector:'textarea'});
+
+
+
+
+
   </script>
 </html>
