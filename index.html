@@ -17,7 +17,6 @@
         </textarea>
     Html: {{content}}<br />
     Markdown: {{ content | markdown}}
-
     </div>
   </body>
   <script>
@@ -50,10 +49,13 @@
 
 
     })
+    //filter to turn html into markdown format
     Vue.filter('markdown', function(value){
 
       return toMarkdown(value);
     })
+
+    //initializing new Vue 
     new Vue({
       el: '#tinymce-form',
       data: {
