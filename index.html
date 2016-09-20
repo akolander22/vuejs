@@ -6,6 +6,7 @@
   </head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.3.4/tinymce.min.js"></script>
+  <script src="to-markdown.js" charset="utf-8"></script>
   <body>
     <div id="tinymce-form">
         <textarea
@@ -14,8 +15,9 @@
                 v-tinymce-editor="content">
                 {{content}}
         </textarea>
-    {{ content }}
-    <!-- {{markdown}} -->
+    Html: {{content}}<br />
+    Markdown: {{ content | markdown}}
+
     </div>
   </body>
   <script>
@@ -48,13 +50,16 @@
 
 
     })
+    Vue.filter('markdown', function(value){
 
+      return toMarkdown(value);
+    })
     new Vue({
       el: '#tinymce-form',
       data: {
         content: 'Editable Text Goes Here',
-        // markdown: content.toMarkdown
       }
+
     })
 
 
